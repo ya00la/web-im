@@ -28,13 +28,16 @@ XDomainRequest为了确保安全构建，采用了多种方法。
 https://github.com/sass/node-sass/issues/1579
 
 
-### ////////////////////kaistart WEB IM 项目介绍//////////////////////////////
-### 实现功能（群，陌生人）之间的文本、表情、图片、文件的传输
-### 开发代码放在project文件夹下的src目录下,src/entry.js为入口文件 
-### 1、project/common/主要为整个webIM的配置文件，
-### 2、project/sdk/ 环信webIM的sdk文件
-### 3、project/webrtc/是一个支持网页浏览器进行实时语音对话或视频对话的js库，项目中没有用到
+##  kaistart WEB IM 项目介绍
+
+ 实现功能（群，陌生人）之间的文本、表情、图片、文件的传输
+
+ 开发代码放在project文件夹下的src目录下,src/entry.js为入口文件 
+
+ 1、project/common/主要为整个webIM的配置文件
+ 2、project/sdk/ 环信webIM的sdk文件
+ 3、project/webrtc/是一个支持网页浏览器进行实时语音对话或视频对话的js库，项目中没有用到
 
 
-###打包运行，环境变量 NODE_ENV='production' || 'dev' || 'test',在不输入环境变量时，默认是test环境
+打包运行，环境变量 NODE_ENV='production' || 'dev' || 'test',在不输入环境变量时，默认是test环境
 
