@@ -5,7 +5,9 @@
  开发代码放在project文件夹下的src目录下,src/entry.js为入口文件 
 
  1、project/common/主要为整个webIM的配置文件
+
  2、project/sdk/ 环信webIM的sdk文件
+ 
  3、project/webrtc/是一个支持网页浏览器进行实时语音对话或视频对话的js库，项目中没有用到
 
 
