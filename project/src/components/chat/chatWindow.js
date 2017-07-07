@@ -521,8 +521,7 @@ module.exports = React.createClass({
                     <div className="webim-grounp-notice">
                         <p>成员（{this.state.groupNum}）</p>
                     </div>
-                    <ul onBlur={this.handleOnBlur}
-                        tabIndex="-1"
+                    <ul tabIndex="-1"
                         ref='member'
                         className={'webim-group-memeber' + memberStatus}> {roomMember}
                     </ul>
