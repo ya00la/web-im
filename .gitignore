@@ -1,0 +1,15 @@
+node_modules
+.DS_Store
+/.project
+.idea/*
+*.swp
+publish/*
+npm-debug.log
+web-im
+web-im-*.zip
+image/docker/webim/webim
+coverage/*
+project/dist/im-*.js
+project/sdk/dist/websdk-*.js
+project/sdk/dist/websdk-*.js.map
+project/webrtc/dist/webrtc-*.js
