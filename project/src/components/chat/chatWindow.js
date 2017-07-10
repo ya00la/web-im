@@ -112,7 +112,7 @@ module.exports = React.createClass({
                         Demo.api.NotifyError("listMember:" + errCode + ' ' + errMessage);
                     });
             } else {
-                apis.getCrowdList({"hxid": Demo.selected}, this.fetchBack.bind(null,1,this))
+                apis.getCrowdList({"hxid": Demo.selected, isV3: 1}, this.fetchBack.bind(null,1,this))
             }
         } else {
             this.setState({members: [], memberShowStatus: false});
@@ -519,7 +519,7 @@ module.exports = React.createClass({
                 </div>
                 <div className={Demo.selectedCate == 'groups' ? 'webim-grounp-right' : 'hide'}>
                     <div className="webim-grounp-notice">
-                        <p>成员（{this.state.groupNum}）</p>
+                        <p>成员<span className={(this.state.groupNum > 0) ? '' : 'hide'}>（{this.state.groupNum}）</span></p>
                     </div>
                     <ul tabIndex="-1"
                         ref='member'

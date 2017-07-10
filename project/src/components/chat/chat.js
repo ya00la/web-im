@@ -57,7 +57,7 @@ module.exports = React.createClass({
                 me.confirmPop(options);
             },
             onOpened: function () {
-                console.error('i come in')
+                console.error('I have already come in')
                 me.props.update({
                     signIn: false,
                     signUp: false,
