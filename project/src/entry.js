@@ -88,7 +88,11 @@ Demo.FILETYPE = {
     doc: 1,
     docx: 1,
     xls: 1,
-    pdf: 1
+    xlsx: 1,
+    pdf: 1,
+    pages: 1,
+    wps: 1
+
 };
 Demo.AUDIOTYPE = {
     mp3: 1,
