@@ -52,28 +52,42 @@ module.exports = React.createClass({
                     });
 
             } else {
-                Demo.conn.queryRoomInfo({
-                    roomId: me.props.roomId,
-                    success: function (settings, members, fields) {
-                        if (members && members.length > 0) {
-                            var jid = members[0].jid;
-                            var username = jid.substr(0, jid.lastIndexOf("@"));
-                            var admin = 0;
-                            if (members[0].affiliation == 'owner' && username.toLowerCase() == Demo.user) {
-                                admin = 1;
-                            }
-                            me.setState({settings: settings, admin: admin, owner: members, fields: fields});
-                            if (cb_type == 'listMember') {
-                                me.listMember();
-                            } else if (cb_type == 'opertion') {
-                                me.refs['operation_div'].refs['switch'].click();
-                            }
-                        }
-                    },
-                    error: function () {
-                        Demo.api.NotifyError('queryRoomInfo error', me.props.roomId);
-                    }
-                });
+                if (cb_type == 'listMember') {
+                    me.listMember();
+                } else if (cb_type == 'opertion') {
+                    me.refs['operation_div'].refs['switch'].click();
+                }
+
+
+                // Demo.conn.queryRoomInfo({
+                //     roomId: me.props.roomId,
+                //     success: function (settings, members, fields) {
+                //         console.log('============getGroupInfo======444====')
+                //         console.error('===============')
+                //         console.log('settings', settings)
+                //         console.log('members', members)
+                //         console.log('fields', fields)
+                //         console.error('===============')
+                //         if (members && members.length > 0) {
+                //             var jid = members[0].jid;
+                //             var username = jid.substr(0, jid.lastIndexOf("@"));
+                //             var admin = 0;
+                //             if (members[0].affiliation == 'owner' && username.toLowerCase() == Demo.user) {
+                //                 admin = 1;
+                //             }
+                //             me.setState({settings: settings, admin: admin, owner: members, fields: fields});
+                //             if (cb_type == 'listMember') {
+                //                 me.listMember();
+                //             } else if (cb_type == 'opertion') {
+                //                 me.refs['operation_div'].refs['switch'].click();
+                //             }
+                //         }
+                //     },
+                //     error: function () {
+                //         console.log('============getGroupInfo======555====')
+                //         Demo.api.NotifyError('queryRoomInfo error', me.props.roomId);
+                //     }
+                // });
             }
         }
     },
@@ -404,108 +418,27 @@ module.exports = React.createClass({
             var affiliation = i, user = this.state.members[i], isAdmin = false, isMuted = false;
             var item = this.state.members[i];
              affiliation = 'member';
-            if (i===0) {
-                affiliation = 'owner';
-                isAdmin = true;
-                isMuted = true;
-            }
+            //  console.log(i)
+            // if (i===0) {
+            //     affiliation = 'owner';
+            //     isAdmin = true;
+            //     isMuted = true;
+            //     console.error('admin===============')
+            // }
             
             var roleTypeName = user.roleType!== 0 ? user.roleTypeName : '';
             var username = item.id;
 
-            if (isAdmin) {
-                roomMember.push(<li key={i}>
-                    <Avatar src={user.header}/>
-                    <span className="webim-group-name">
-                        {user.nick}
-                        <i className='role-type-name'>{roleTypeName}</i>
-                    </span>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={this.addToGroupBlackList.bind(this, username, i)}
-                           title={Demo.lan.addToGroupBlackList}>n</i>
-                    </div>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={isMuted ? this.removeMute.bind(this, username) : this.mute.bind(this, username)}
-                           title={isMuted ? Demo.lan.removeMute : Demo.lan.mute}>{isMuted ? 'e' : 'f'}</i>
-                    </div>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={isAdmin ? this.removeAdmin.bind(this, username) : this.setAdmin.bind(this, username)}
-                           title={Demo.lan.rmAdministrator}>&darr;</i>
-                    </div>
-                </li>);
-            } else {
-                roomMember.push(<li key={i} onClick={Demo.user !== username? this.openStrangeChat.bind(this, username,user): ''}>
-                    <Avatar src={user.header||''}/>
-                    <span className="webim-group-name">
-                    <i className={user.roleTypeName ? 'role-type-nick':''}>{user.nick}</i>
-                    <i className={user.roleTypeName ? 'role-type-name':''} style={{background: user.roleTypeName === '发起人' ? '#f7a105' : (user.roleTypeName === '项目客服' ? '#4eb1f4':'')}}>{roleTypeName}</i>
-                    </span>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={this.addToGroupBlackList.bind(this, username, i)}
-                           title={Demo.lan.addToGroupBlackList}>n</i>
-                    </div>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={isMuted ? this.removeMute.bind(this, username) : this.mute.bind(this, username)}
-                           title={isMuted ? Demo.lan.removeMute : Demo.lan.mute}>{isMuted ? 'e' : 'f'}</i>
-                    </div>
-                    <div className="webim-operation-icon"
-                         style={{display: affiliation == 'owner' ? 'none' : ''}}>
-                        <i className={"webim-leftbar-icon font smaller " + className}
-                           style={{display: this.state.admin != 1 ? 'none' : ''}}
-                           onClick={isAdmin ? this.removeAdmin.bind(this, username) : this.setAdmin.bind(this, username)}
-                           title={Demo.lan.administrator}>&uarr;</i>
-                    </div>
-                </li>);
-            }
+            roomMember.push(<li key={i} onClick={Demo.user !== username? this.openStrangeChat.bind(this, username,user): ''}>
+                <Avatar src={user.header||''}/>
+                <span className="webim-group-name">
+                <i className={user.roleTypeName ? 'role-type-nick':''}>{user.nick}</i>
+                <i className={user.roleTypeName ? 'role-type-name':''} style={{background: user.roleTypeName === '发起人' ? '#f7a105' : (user.roleTypeName === '项目客服' ? '#4eb1f4':'')}}>{roleTypeName}</i>
+                </span>
+            </li>);
+            
 
 
-        }
-
-        var operations = [];
-        if (Demo.selectedCate == 'friends') {
-            operations.push(< OperationsFriends
-                key='operation_div'
-                ref='operation_div'
-                roomId={this.props.roomId}
-                admin={this.state.admin}
-                owner={this.state.owner}
-                settings={this.state.settings}
-                getGroupInfo={this.getGroupInfo}
-                onBlur={this.handleOnBlur}
-                name={this.props.name}
-                updateNode={this.props.updateNode}
-                delFriend={this.props.delFriend}
-            />);
-        } else if (Demo.selectedCate == 'groups') {
-            operations.push(< OperationsGroups
-                key='operation_div'
-                ref='operation_div'
-                name={this.props.name}
-                roomId={this.props.roomId}
-                admin={this.state.admin}
-                owner={this.state.owner}
-                settings={this.state.settings}
-                fields={this.state.fields}
-                getGroupInfo={this.getGroupInfo}
-                onBlur={this.handleOnBlur}
-                leaveGroup={this.props.leaveGroup}
-                destroyGroup={this.props.destroyGroup}
-            />);
         }
 
         return (
@@ -513,9 +446,6 @@ module.exports = React.createClass({
                 <div className='webim-chatwindow-title'>
                     {(Demo.selectedCate == 'chatrooms' || Demo.selectedCate == 'groups') ? this.state.groupName : this.props.nick}
                    
-                </div>
-                <div className={(operations.length > 0) ? '' : 'hide'}>
-                    {operations}
                 </div>
                 <div className={Demo.selectedCate == 'groups' ? 'webim-grounp-right' : 'hide'}>
                     <div className="webim-grounp-notice">
