@@ -217,6 +217,10 @@
     text-overflow: ellipsis;
     display: inline-block;
     white-space: nowrap;
+    font-style: normal;
+}
+.webim-chatwindow .webim-group-name i{
+    font-style: normal;
 }
 .button-right{
     right:10px;
