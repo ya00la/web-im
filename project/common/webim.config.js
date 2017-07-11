@@ -6,8 +6,12 @@
  *
  */
 var appkey = 'kaistart#kaistart'
+var xmppURL = 'im-api.easemob.com'
+var apiURL = '//a1.easemob.com'
 if (process.env.NODE_ENV === 'production') {
     appkey = 'kaistart#kaishi'
+    xmppURL = 'im-api-vip6.easemob.com'
+    apiURL = '//a1-vip6.easemob.com'
 } else if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev' ) {
     appkey = 'kaistart#kaistart'
 }
@@ -17,11 +21,11 @@ WebIM.config = {
     /*
      * XMPP server
      */
-    xmppURL: 'im-api.easemob.com',
+    xmppURL: xmppURL,
     /*
      * Backend REST API URL
      */
-    apiURL: (location.protocol === 'https:' ? 'https:' : 'http:') + '//a1.easemob.com',
+    apiURL: (location.protocol === 'https:' ? 'https:' : 'http:') + apiURL,
     /*
      * Application AppKey
      */
