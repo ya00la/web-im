@@ -446,7 +446,7 @@ module.exports = React.createClass({
                 roomMember.push(<li key={i} onClick={Demo.user !== username? this.openStrangeChat.bind(this, username,user): ''}>
                     <Avatar src={user.header||''}/>
                     <span className="webim-group-name">
-                    {user.nick}
+                    <i className={user.roleTypeName ? 'role-type-nick':''}>{user.nick}</i>
                     <i className={user.roleTypeName ? 'role-type-name':''} style={{background: user.roleTypeName === '发起人' ? '#f7a105' : (user.roleTypeName === '项目客服' ? '#4eb1f4':'')}}>{roleTypeName}</i>
                     </span>
                     <div className="webim-operation-icon"

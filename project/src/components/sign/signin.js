@@ -105,6 +105,7 @@ module.exports = React.createClass({
             accessToken: auth,
             appKey: this.props.config.appkey,
             success: function (token) {
+                console.log('open success====' + new Date())
                 var encryptUsername = btoa(username);
                 encryptUsername = encryptUsername.replace(/=*$/g, "");
                 var token = token.access_token;
@@ -114,12 +115,6 @@ module.exports = React.createClass({
                 WebIM.utils.setCookie('webim_header', header, 1);
                 window.location.href = url
                 Demo.token = token;
-                // me.props.update({
-                //         signIn: false,
-                //         signUp: false,
-                //         loadingStatus: false,
-                //         chat: true
-                //     });
             },
             error: function () {
                 window.location.href = '#'
@@ -169,7 +164,7 @@ module.exports = React.createClass({
             console.log('login success');
             var me = this
             if (this.validTabs() === true) {
-                console.log('begin to open');
+                console.log('begin to open===' + new Date());
                 Demo.conn.open(options);
             }
             else {

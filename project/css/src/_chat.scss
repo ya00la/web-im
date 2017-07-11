@@ -199,12 +199,24 @@
     }
 }
 .role-type-name{
+    display: inline-block;
+    overflow: hidden;
     font-size: 10px;
     font-style: normal;
     background: #000;
     color: #fff;
     margin-left: 5px;
     padding: 0 1px;
+    height: 20px;
+    line-height: 1.5;
+}
+.role-type-nick{
+    display: inline-block;
+    max-width:80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
 }
 .button-right{
     right:10px;
