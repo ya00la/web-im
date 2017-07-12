@@ -47,7 +47,7 @@ module.exports = React.createClass({
             <div>
                 <div className={'webim' + (WebIM.config.isWindowSDK ? ' webim_isWindowSDK' : '')}>
                     <div className={'webim-logo' + (!this.state.signIn && !this.state.signUp ? ' hide' : '')}>
-                        <img src={Demo.FILENAME + '/images/logo' + (WebIM.config.isWindowSDK ? '-windowSDK' : '') + '.png'}/>
+                        开始吧即时通讯平台
                     </div>
                     <SignIn show={this.state.signIn} {...this.props} update={this.update} loading={this.loading}/>
                     <Chat show={this.state.chat} {...this.props} update={this.update}
