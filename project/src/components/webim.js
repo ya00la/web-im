@@ -54,7 +54,7 @@ module.exports = React.createClass({
                           loading={this.loading} {...props} />
                     <Loading show={this.state.loadingStatus} msg={this.state.loadingMsg}/>
                 </div>
-                <footer className={'copyright' + (WebIM.config.isWindowSDK ? ' hide' : '')}>© {year} 环信科技</footer>
+                <footer className={'copyright' + (WebIM.config.isWindowSDK ? ' hide' : '')}>© {year} 开始吧</footer>
             </div>
         );
     }
