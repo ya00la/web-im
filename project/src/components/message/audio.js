@@ -1,8 +1,9 @@
 var React = require("react");
 var ReactDOM = require('react-dom');
 var Avatar = require('../common/avatar');
+var moment = require('moment');
 
-
+var preMsgTime = null
 var AudioMsg = React.createClass({
 
     getInitialState: function () {
@@ -83,19 +84,32 @@ var AudioMsg = React.createClass({
 
     render: function () {
         var icon = this.props.className === 'left' ? 'H' : 'I';
-
+        var showTime = this.props.time
+        // if (preMsgTime) {
+        //     if (moment(showTime).from(preMsgTime) === 'a few seconds ago'){
+        //         preMsgTime = this.props.time
+        //         showTime = ''
+        //     } else {
+        //         preMsgTime = this.props.time
+        //     }
+        // } else {
+        //     preMsgTime = this.props.time
+        // }
         return (
-            <div className={'rel pointer ' + this.props.className}>
-                <Avatar src={this.props.src} className={this.props.className + ' small'}/>
-                <p className={this.props.className}>{this.props.name} {this.props.time}</p>
-                <div className='webim-msg-value'>
-                    <span className='webim-msg-icon font'>{icon}</span>
-                    <div>
-                        <div className='webim-audio-msg'>{'audio ' + this.props.length + '\'\''}</div>
+            <div className={"webim-msg-box"}>
+                <p style={{textAlign:'center', color:'#999'}}>{showTime}</p>
+                <div className={'rel pointer ' + this.props.className}>
+                    <Avatar src={this.props.src} className={this.props.className + ' small'}/>
+                    <p className={this.props.className}>{this.props.name}</p>
+                    <div className='webim-msg-value'>
+                        <span className='webim-msg-icon font'>{icon}</span>
+                        <div>
+                            <div className='webim-audio-msg'>{'audio ' + this.props.length + '\'\''}</div>
+                        </div>
+                        <div ref='bg' className='webim-audio-slash' onClick={this.toggle}></div>
                     </div>
-                    <div ref='bg' className='webim-audio-slash' onClick={this.toggle}></div>
+                    <audio id={this.props.id} ref='audio' className='hide'/>
                 </div>
-                <audio id={this.props.id} ref='audio' className='hide'/>
             </div>
         );
     }
@@ -104,7 +118,7 @@ var AudioMsg = React.createClass({
 module.exports = function (options, sentByMe) {
     var props = {
         src: options.avatar || Demo.FILENAME + '/images/default.png',
-        time: options.time || new Date().toLocaleString(),
+        time: options.time || moment().format('YYYY-MM-DD h:mm'),
         value: options.value || '',
         name: options.name,
         length: options.length || '',
@@ -113,6 +127,7 @@ module.exports = function (options, sentByMe) {
         error: options.error,
         errorText: options.errorText
     };
+    console.log(props.time)
 
     var node = document.createElement('div');
     node.className = 'webim-msg-container rel';
