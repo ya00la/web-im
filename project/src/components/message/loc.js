@@ -1,6 +1,6 @@
 var React = require("react");
 var ReactDOM = require('react-dom');
-var Avatar = require('../common/avatar');
+// var Avatar = require('../common/avatar');
 
 
 var LocMsg = React.createClass({
@@ -10,7 +10,6 @@ var LocMsg = React.createClass({
 
         return (
             <div className={'rel ' + this.props.className}>
-                <Avatar src={this.props.src} className={this.props.className + ' small'}/>
                 <p className={this.props.className}>{this.props.name} {this.props.time}</p>
                 <div className='webim-msg-value' style={{minWidth: '200px'}}>
                     <span className='webim-msg-icon font'>{icon}</span>
@@ -30,7 +29,7 @@ var LocMsg = React.createClass({
 
 module.exports = function (options, sentByMe) {
     var props = {
-        src: options.avatar || Demo.FILENAME + '/images/default.png',
+        // src: options.avatar || Demo.FILENAME + '/images/default.png',
         time: options.time || new Date().toLocaleString(),
         value: options.value || '',
         name: options.name,

@@ -18,6 +18,8 @@ require('../sdk/index');
 //     require('../webrtc/dist/adapter');
 //     require('../webrtc/src/entry');
 // }
+// 
+
 
 // //////////////////////////////////////////////////////////////////////////
 window.Demo = {
@@ -36,6 +38,11 @@ WebIM.Emoji = Emoji;
 window.log = Api.log;
 
 
+//  用户一对一基本信息
+Demo.userID = gon.otc_buyer_sn.toLocaleLowerCase(),
+Demo.userName = gon.otc_buyer_name,
+Demo.sellerID = gon.otc_seller_sn.toLocaleLowerCase(),
+Demo.sellerName = gon.otc_seller_name
 
 // import language package
 // Demo.lan = Language.English;
@@ -80,28 +87,9 @@ Demo.IMGTYPE = {
     jpg: 1,
     png: 1
 };
-Demo.FILETYPE = {
-    gif: 1,
-    bmp: 1,
-    jpg: 1,
-    png: 1,
-    doc: 1,
-    docx: 1,
-    xls: 1,
-    xlsx: 1,
-    pdf: 1,
-    pages: 1,
-    wps: 1
-
-};
-Demo.AUDIOTYPE = {
-    mp3: 1,
-    amr: 1,
-    wmv: 1
-};
 
 Demo.chatingCate = '';    // friends|groups|chatrooms|strangers
-Demo.selectedCate = 'groups';   // friends|groups|chatrooms|strangers
+Demo.selectedCate = 'strangers';   // friends|groups|chatrooms|strangers
 Demo.chatState = {
     friends: {
         selected: '',

@@ -1,7 +1,7 @@
 var React = require("react");
 var UI = require('../common/webim-demo');
 var Button = UI.Button;
-var UploadShim = require('./uploadShim');
+// var UploadShim = require('./uploadShim');
 
 
 module.exports = React.createClass({
@@ -19,7 +19,7 @@ module.exports = React.createClass({
             }
         }
 
-        WebIM.flashUpload = UploadShim({fileInputId: 'uploadShim'}).flashUpload;
+        // WebIM.flashUpload = UploadShim({fileInputId: 'uploadShim'}).flashUpload;
 
         return {
             send: false,
@@ -80,7 +80,7 @@ module.exports = React.createClass({
             msg: value,
             to: Demo.selected,
             roomType: chatroom,
-            ext: {header: Demo.header, nick: Demo.nickname},
+            ext: {nick: Demo.nickname},
             success: function (id, mid) {
                 me.state.showEmoji && me.setState({showEmoji: false});
             }
@@ -160,8 +160,6 @@ module.exports = React.createClass({
                               onClick={this.showEmoji}>J</span>);
         roomMember.push(<span key={keyValue++} className='webim-picture-icon font smaller'
                               onClick={this.sendPicture}>K</span>);
-        roomMember.push(<span key={keyValue++} className='webim-file-icon font smaller'
-                              onClick={this.sendFile}>S</span>);
         roomMember.push(<span key={keyValue++} className='webim-file-icon font smaller'
                               onClick={this.clear}>T</span>);
         return (

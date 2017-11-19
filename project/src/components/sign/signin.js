@@ -2,7 +2,6 @@ var React = require("react");
 var reqwest = require("reqwest");
 var Notify = require('../common/notify');
 var UI = require('../common/webim-demo');
-var apis = require('../../libs/api');
 
 var Input = UI.Input;
 var Button = UI.Button;
@@ -12,8 +11,7 @@ module.exports = React.createClass({
     getInitialState: function () {
         return {
             pageLimit: 8,
-            imId: null,
-            header: 'http://images.kaistart.com/header2.png'
+            imId: null
         };
     },
 
@@ -64,31 +62,18 @@ module.exports = React.createClass({
             this.login();
         }
     },
-    login: function () {
-        var username = this.refs.name.refs.input.value;
-        var auth = this.refs.auth.refs.input.value;
-        if (!username || !auth) {
-            Demo.api.NotifyError('用户名或密码' + Demo.lan.notEmpty);
-            return false;
-        }
-        this.signin(username, auth);
-    },
-     signin: function (username, pwd) {
-        apis.userLogin({"username": username, "password": pwd}, this.fetchBack.bind(null,this))
-     },
-    fetchBack: function (tag,res) {
-        var data = res.result
-        this.state.imId = data.id
-        this.state.header = data.header || this.state.header
-        this.loginIM(data.nick, this.state.header)
-     },
-    loginIM: function (nickname, header) {
-        var username = this.state.imId;
+     // 自动登录MebIM
+    loginIM: function () {
+        var username = window.Demo.userID;
+        var nickname = window.Demo.userName;
         var auth = 'ab3bf44269ddd3ec38ef1b17daea19b1';
-        this.signinIM(username, auth, nickname, header, false);
+        this.signinIM(username, auth, nickname, false);
+        console.log(username+ '=============loginIM==123=======' +window.Demo.userName)
     },
 
-    signinIM: function (username, auth, nickname, header, type) {
+    signinIM: function (username, auth, nickname, type) {
+        console.log(username + '========signinIM===========' + auth)
+        console.log(nickname + '========signinIM===========' + type)
         var username = username;
         var auth = auth;
         var type = type;
@@ -112,8 +97,8 @@ module.exports = React.createClass({
                 var url = '#username=' + encryptUsername;
                 WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);
                 WebIM.utils.setCookie('webim_nick', nickname, 1);
-                WebIM.utils.setCookie('webim_header', header, 1);
                 window.location.href = url
+                window.location.href = '#username=' + encryptUsername + '&curNode=' + '5e305eb325c82846e050a00acc3c7db4';
                 Demo.token = token;
             },
             error: function () {
@@ -133,7 +118,6 @@ module.exports = React.createClass({
 
         Demo.user = username;
         Demo.nickname = nickname
-        Demo.header = header
         this.props.loading('show');
 
         Demo.conn.autoReconnectNumTotal = 0;
@@ -197,7 +181,6 @@ module.exports = React.createClass({
             username: username,
             password: pwd,
             nickname: nickname,
-            avatarURLPath: this.state.header,
             appKey: this.props.config.appkey,
             apiUrl: this.props.config.apiURL,
             success: function () {
@@ -253,11 +236,14 @@ module.exports = React.createClass({
         var nickname = uri.nickname;
         var auth = WebIM.utils.getCookie()['webim_' + username];
         var nickname = WebIM.utils.getCookie()['webim_nick'];
-        var header = WebIM.utils.getCookie()['webim_header'];
         Demo.token = auth;
         if (username && auth) {
+             // 自动登录webIM
             username = atob(username);
-            this.signinIM(username, auth, nickname, header, true);
+            this.signinIM(username, auth, nickname, true);
+        } else {
+            // 登录webIM
+            this.loginIM()
         }
     },
 
@@ -271,12 +257,6 @@ module.exports = React.createClass({
 
         return (
             <div className={this.props.show ? 'webim-sign' : 'webim-sign hide'}>
-                <h2>{Demo.lan.signIn}</h2>
-                <Input placeholder={Demo.lan.username} defaultFocus='true' ref='name' keydown={this.keyDown}/>
-                <Input placeholder={Demo.lan.password} ref='auth' type='password' keydown={this.keyDown}/>
-                <Button ref='button' text={Demo.lan.signIn} onClick={this.login}/>
-                <p>
-                </p>
             </div>
         );
     }

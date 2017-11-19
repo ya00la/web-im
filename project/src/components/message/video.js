@@ -1,6 +1,5 @@
 var React = require("react");
 var ReactDOM = require('react-dom');
-var Avatar = require('../common/avatar');
 
 
 var VideoMsg = React.createClass({
@@ -32,7 +31,6 @@ var VideoMsg = React.createClass({
 
         return (
             <div className={'rel pointer ' + this.props.className}>
-                <Avatar src={this.props.src} className={this.props.className + ' small'}/>
                 <p className={this.props.className}>{this.props.name} {this.props.time}</p>
                 <div className="clearfix">
                     <div className='webim-msg-value'>
@@ -52,7 +50,6 @@ var VideoMsg = React.createClass({
 
 module.exports = function (options, sentByMe) {
     var props = {
-        src: options.avatar || Demo.FILENAME + '/images/default.png',
         time: options.time || new Date().toLocaleString(),
         value: options.value || '',
         name: options.name,

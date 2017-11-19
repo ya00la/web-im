@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactDOM = require('react-dom');
 var moment = require('moment');
-var Avatar = require('../common/avatar');
+// var Avatar = require('../common/avatar');
 
 var preMsgTime = null
 
@@ -78,7 +78,6 @@ var ImgMsg = React.createClass({
             <div className={"webim-msg-box"}>
                 <p style={{textAlign:'center', color:'#999'}}>{showTime}</p>
                 <div className={'rel ' + this.props.className}>
-                    <Avatar src={this.props.src} className={this.props.className + ' small'}/>
                     <p className={this.props.className}>{this.props.name}</p>
                     <div className="clearfix">
                         <div className={"webim-msg-delivered " + statusClass} id={id} name={nid}>
@@ -101,7 +100,7 @@ var ImgMsg = React.createClass({
 module.exports = function (options, sentByMe) {
     var props = {
         id: options.id,
-        src: options.avatar || Demo.FILENAME + '/images/default.png',
+        // src: options.avatar || Demo.FILENAME + '/images/default.png',
         time: options.time || moment().format('YYYY-MM-DD h:mm'),
         value: options.value || '',
         name: options.name,

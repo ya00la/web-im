@@ -5,11 +5,13 @@
  * In this way , others won't be influenced by this config while git pull.
  *
  */
+// var appkey = '1153171116115538#bixin-staging'
 var appkey = 'kaistart#kaistart'
 var xmppURL = 'im-api.easemob.com'
 var apiURL = '//a1.easemob.com'
 if (process.env.NODE_ENV === 'production') {
     appkey = 'kaistart#kaishi'
+    // appkey = '1153171116115538#coin900-production'
     xmppURL = 'im-api-vip6.easemob.com'
     apiURL = '//a1-vip6.easemob.com'
 } else if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev' ) {

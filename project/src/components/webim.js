@@ -11,13 +11,14 @@ module.exports = React.createClass({
         return {
             signIn: true,
             signUp: false,
-            chat: false,
+            chat: true,
             loadingStatus: false,
             loadingMsg: ''
         };
     },
 
     update: function (state) {
+        // window.alert(JSON.stringify(state))
         this.setState({
             signIn: state.signIn,
             // signUp: state.signUp,
@@ -46,15 +47,11 @@ module.exports = React.createClass({
         return (
             <div>
                 <div className={'webim' + (WebIM.config.isWindowSDK ? ' webim_isWindowSDK' : '')}>
-                    <div className={'webim-logo' + (!this.state.signIn && !this.state.signUp ? ' hide' : '')}>
-                        开始吧即时通讯平台
-                    </div>
                     <SignIn show={this.state.signIn} {...this.props} update={this.update} loading={this.loading}/>
                     <Chat show={this.state.chat} {...this.props} update={this.update}
                           loading={this.loading} {...props} />
                     <Loading show={this.state.loadingStatus} msg={this.state.loadingMsg}/>
                 </div>
-                <footer className={'copyright' + (WebIM.config.isWindowSDK ? ' hide' : '')}>© {year} 开始吧</footer>
             </div>
         );
     }

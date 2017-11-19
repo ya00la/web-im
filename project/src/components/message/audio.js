@@ -1,6 +1,6 @@
 var React = require("react");
 var ReactDOM = require('react-dom');
-var Avatar = require('../common/avatar');
+// var Avatar = require('../common/avatar');
 var moment = require('moment');
 
 var preMsgTime = null
@@ -99,7 +99,6 @@ var AudioMsg = React.createClass({
             <div className={"webim-msg-box"}>
                 <p style={{textAlign:'center', color:'#999'}}>{showTime}</p>
                 <div className={'rel pointer ' + this.props.className}>
-                    <Avatar src={this.props.src} className={this.props.className + ' small'}/>
                     <p className={this.props.className}>{this.props.name}</p>
                     <div className='webim-msg-value'>
                         <span className='webim-msg-icon font'>{icon}</span>
@@ -117,7 +116,7 @@ var AudioMsg = React.createClass({
 
 module.exports = function (options, sentByMe) {
     var props = {
-        src: options.avatar || Demo.FILENAME + '/images/default.png',
+        // src: options.avatar || Demo.FILENAME + '/images/default.png',
         time: options.time || moment().format('YYYY-MM-DD h:mm'),
         value: options.value || '',
         name: options.name,

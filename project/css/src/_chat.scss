@@ -16,7 +16,8 @@
     position: relative;
     float: left;
     height: 100%;
-    width: calc(100% - 303px);
+    width: 100%;
+    // width: calc(100% - 303px);
 
     textarea {
         position: absolute;
@@ -184,7 +185,8 @@
         width: 280px;
         height: 194px;
         bottom: 150px;
-        left: -140px;
+        left: 0;
+        // left: -140px;
         border-radius: 2px;
         background: #fff;
         box-sizing: border-box;
