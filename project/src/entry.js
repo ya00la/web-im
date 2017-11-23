@@ -39,6 +39,12 @@ window.log = Api.log;
 
 
 //  用户一对一基本信息
+// Demo.userID = 'coinx2tgoeiwx';
+// Demo.userName = 'zhen';
+// Demo.sellerID = 'coinumf2mgtnx';
+// Demo.sellerName = '小鲜肉';
+
+//  用户一对一基本信息
 Demo.userID = gon.otc_buyer_sn.toLocaleLowerCase(),
 Demo.userName = gon.otc_buyer_name,
 Demo.sellerID = gon.otc_seller_sn.toLocaleLowerCase(),
